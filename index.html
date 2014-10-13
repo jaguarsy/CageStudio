@@ -13,12 +13,13 @@
 	<link rel="apple-touch-icon-precomposed" href="public/i/app-icon72x72@2x.png">
 	<meta name="apple-mobile-web-app-title" content="Amaze UI" />
 	<link rel="stylesheet" href="public/css/amazeui.css">
-	<link rel="stylesheet" href="public/css/index.css"></head>
+	<link rel="stylesheet" href="public/css/index.css">
 	<style type="text/css">
         .ng-cloak {
             display: none;
         }
     </style>
+</head>
 <body class="ng-cloak">
 	<!--[if lte IE 9]>
 	<p class="browsehappy">
@@ -29,17 +30,22 @@
 	</p>
 	<![endif]-->
 
-	<div class='title'></div>
+	<div class='title'>
+		<div id="menupanel">
+			<a href="javascript:void(0)" data-am-offcanvas="{target: '#menubar'}">
+				<span class="am-icon-list"></span>
+			</a>
+		</div>
+	</div>
 
 	<div class="container" ng-controller="IndexController">
-		<a href="javascript:void(0)" data-am-offcanvas="{target: '#menubar'}">点击</a>
 
 		<div ng-bind-html="partail"></div>
 	</div>
 	<div id="menubar" class="am-offcanvas">
 		<div class="amz-sidebar am-offcanvas-bar am-offcanvas-bar-flip">
 			<ul class="am-nav">
-				<li class="am-nav-header">UI 增强</li>
+				<li class="am-nav-header">菜单</li>
 				<li>
 					<a href="index.html">
 						<span class="am-icon-newspaper-o"></span>
