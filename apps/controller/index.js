@@ -1,7 +1,33 @@
-var phonecatApp = angular.module('CageStudioApp', []);
-phonecatApp.controller('IndexController', function($scope, $http, $sce) {
-	$http.get('apps/views/news.html').success(function(data) {
-		$scope.partail = data;
-		$scope.partail = $sce.trustAsHtml($scope.partail);
-	});
-});
+"use strict"
+
+var cagestudio = angular.module('CageStudioApp', ['ngRoute']);
+
+cagestudio.config(['$routeProvider', function($routeProvider) {
+	$routeProvider
+		.when('/', {
+			controller: 'NewsController',
+			templateUrl: 'apps/views/news.html'
+		})
+		.when('/music', {
+			controller: 'MusicController',
+			templateUrl: 'apps/views/music.html'
+		})
+		.otherwise({
+			redirectTo: '/'
+		});
+}]);
+
+cagestudio.controller('IndexController', ['$scope','$location', function($scope,$location) {
+
+	$scope.jump = function($event){
+		if ($event) $event.preventDefault();
+		$location.path($event.target.getAttribute('href'));
+	}
+
+}])
+.controller('NewsController',[function(){
+
+}])
+.controller('MusicController',[function(){
+
+}])

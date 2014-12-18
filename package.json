@@ -3,7 +3,7 @@
   "main": "index.html",
   "window": {
     "title": "Cage Studio",
-    "toolbar": false,
+    "toolbar": true,
     "frame": false,
     "fullscreen":false,
     "width": 800,
