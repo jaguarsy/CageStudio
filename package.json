@@ -1,12 +1,12 @@
 {
-  "name": "Cage Studio",
+  "name": "CageStudio",
   "main": "index.html",
   "window": {
     "title": "Cage Studio",
-    "toolbar": true,
+    "toolbar": false,
     "frame": false,
     "fullscreen":false,
-    "width": 800,
-    "height": 600
+    "width": 980,
+    "height": 700
   }
 }

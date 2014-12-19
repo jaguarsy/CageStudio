@@ -1,25 +1,26 @@
 <div data-am-widget="list_news" class="am-list-news am-list-news-default" ng-controller="NewsController">
-  <!--列表标题
+
   <div class="am-list-news-hd am-cf">
-    <a href="##">
-      <h2>栏目标题</h2>
-      <span class="am-list-news-more am-fr">更多 &raquo;</span>
-    </a>
-  </div>-->
+    <h2 ng-bind="title"></h2>
+  </div>
   <div class="am-list-news-bd bg-black">
     <ul class="am-list">
-      <li class="am-g am-list-item-dated">
-        <a href="##" class="am-list-item-hd"><small>我很囧，你保重....晒晒旅行中的那些囧！</small></a>
-        <span class="am-list-date">2013-09-18</span>
-      </li>
-      <li class="am-g am-list-item-dated">
-        <a href="##" class="am-list-item-hd"><small>我很囧，你保重....晒晒旅行中的那些囧！</small></a>
-        <span class="am-list-date">2013-10-14</span>
-      </li>
-      <li class="am-g am-list-item-dated">
-        <a href="##" class="am-list-item-hd"><small>我很囧，你保重....晒晒旅行中的那些囧！</small></a>
-        <span class="am-list-date">2013-11-18</span>
+      <li class="am-g am-list-item-dated" ng-repeat="item in list">
+        <a data-am-modal="{target: '#article-show'}" ng-click="show($event,$index)" class="am-list-item-hd">
+          <small ng-bind="item.title"></small>
+        </a>
+        <span class="am-list-date" ng-bind="item.pubDate | dateFilter | date:'yyyy/MM/dd HH:mm'"></span>
       </li>
     </ul>
+  </div>
+
+  <div class="am-popup" id="article-show">
+    <div class="am-popup-inner">
+      <div class="am-popup-hd">
+        <h4 class="am-popup-title" ng-bind="article.title">...</h4>
+        <span data-am-modal-close class="am-close">&times;</span>
+      </div>
+      <div class="am-popup-bd" ng-bind-html="article.encoded | unsafe"></div>
+    </div>
   </div>
 </div>

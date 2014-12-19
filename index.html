@@ -20,7 +20,7 @@
         }
     </style>
 </head>
-<body class="ng-cloak" ng-controller="IndexController">
+<body ng-controller="IndexController">
 	<!--[if lte IE 9]>
 	<p class="browsehappy">
 		你正在使用 <strong>过时</strong>
@@ -29,8 +29,22 @@
 		以获得更好的体验！
 	</p>
 	<![endif]-->
-	<div class='title'>
-		<div id="menupanel">
+	<div class='title' ng-dblclick="maximize()" ng-init="isMaximized=true">
+		<div class="titlepanel">
+			<span class="am-icon-rss"></span>
+			<span>Cage Studio</span>
+		</div>
+		<div class="menupanel">
+			<a href="#" ng-click="minimize()" title="minimize">
+				<span>&minus;</span>
+			</a>
+			<a href="#" ng-click="maximize()" title="maximize">
+				<span>&plus;</span>
+			</a>
+			<a href="#" ng-click="close()" title="close">
+				<span>&times;</span>
+			</a>
+			&nbsp;
 			<a href="javascript:void(0)" data-am-offcanvas="{target: '#menubar'}">
 				<span class="am-icon-list"></span>
 			</a>
@@ -39,11 +53,9 @@
 
 	<div class="container">
 
-
 		<div class="panel-left" ng-view></div>
 
 		<div class="panel-right">
-			123
 		</div>
 	</div>
 
@@ -51,13 +63,13 @@
 		<div class="amz-sidebar am-offcanvas-bar am-offcanvas-bar-flip" style="width:160px">
 			<ul class="am-nav">
 				<li class="am-nav-header">菜单</li>
-				<li>
+				<li ng-class="{active:isActive('/news')}">
 					<a href="/news" ng-click="jump($event)">
 						<span class="am-icon-newspaper-o"></span>
 						News
 					</a>
 				</li>
-				<li>
+				<li ng-class="{active:isActive('/music')}">
 					<a href="/music" ng-click="jump($event)">
 						<span class="am-icon-music"></span>
 						Music
@@ -68,9 +80,10 @@
 	</div>
 
 	<script src="public/bower_components/angularjs/angular.min.js" type="text/javascript"></script>
-	<script type="text/javascript" src="public/js/angular-route.min.js"></script>
-	<script src="public/js/zepto.min.js?1.1.4"></script>
+	<script src="public/js/angular-route.min.js" type="text/javascript"></script>
+	<script src="public/js/zepto.min.js" type="text/javascript"></script>
 	<script src="public/js/amazeui.js"></script>
+	<script src="public/js/xml2json.min.js" type="text/javascript"></script>
 	<script src="apps/controller/index.js"></script>
 </body>
 </html>

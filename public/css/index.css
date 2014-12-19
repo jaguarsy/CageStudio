@@ -1,3 +1,10 @@
+html,body{
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
 body{
 	background: #000000;
 }
@@ -20,7 +27,6 @@ body{
 .container{
 	width: 100%;
 	height: 100%;
-	padding:0 15px 0 15px;
 }
 
 .pull-right{
@@ -37,14 +43,30 @@ body{
 	padding:5px;
 	background: #111111;
 	height:100%;
-	width:23%;
+	width:25%;
 }
 
-#menupanel{
+.titlepanel{
+	float: left;
+	margin-top: 7px;
+	margin-left: 10px;
+	color: #aaaaaa;
+	-webkit-app-region: no-drag;
+}
+
+.menupanel{
 	float: right;
 	margin-top: 7px;
 	margin-right: 10px;
 	-webkit-app-region: no-drag;
+}
+
+.menupanel a{
+	margin-right: 5px;
+}
+
+.menupanel a span{
+	font-weight: bold;
 }
 
 #menubar{
@@ -53,4 +75,42 @@ body{
 
 #menubar ul li a span{
 	width: 20px;
+}
+
+.amz-sidebar{
+	background-color: #222222;
+}
+
+.am-nav > li > a:hover,
+.am-nav > li > a:focus {
+  text-decoration: none;
+  color: #0e90d2;
+  background-color: #000000;
+}
+.am-nav > li.active > a,
+.am-nav > li.active > a:hover,
+.am-nav > li.active > a:focus {
+  color: #ffffff;
+  background-color: #0e90d2;
+  cursor: default;
+}
+
+.panel-left{
+	height:95%;
+	overflow-y:auto; 
+	overflow-x:hidden;
+}
+
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: #222326;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  background-color: #222326;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #333;
 }
