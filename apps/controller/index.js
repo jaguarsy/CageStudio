@@ -2,7 +2,7 @@
 
 var gui = require('nw.gui'),
 	win = gui.Window.get(),
-	cagestudio = angular.module('CageStudioApp', ['ngRoute']);
+	cagestudio = angular.module('CageStudioApp', ['ngRoute', 'firebase']);
 
 cagestudio.filter('dateFilter', function() {
 	return function(dateSTR) {
@@ -23,7 +23,7 @@ cagestudio.config(['$routeProvider', function($routeProvider) {
 			controller: 'NewsController',
 			templateUrl: 'apps/views/news.html'
 		})
-		.when('/news', {
+		.when('/news/:feedId', {
 			controller: 'NewsController',
 			templateUrl: 'apps/views/news.html'
 		})
@@ -36,56 +36,133 @@ cagestudio.config(['$routeProvider', function($routeProvider) {
 		});
 }]);
 
-cagestudio.controller('IndexController', ['$scope', '$location', function($scope, $location) {
+cagestudio.factory('getFeed', ['$http', function($http) {
 
-		$scope.jump = function($event) {
-			if ($event) $event.preventDefault();
-			$location.path($event.target.getAttribute('href'));
-		}
+	var x2js = new X2JS();
 
-		$scope.isActive = function(route) {
-			if (route == "/news" && $location.path() == "/") return true;
-			return route === $location.path();
-		}
+	var isfun = function(callback) {
+		return typeof callback == 'function';
+	}
 
-		$scope.close = function() {
-			win.close();
-		}
+	return function(url, callback) {
+		$http.get(url).
+		success(function(data, status, headers, config) {
+			if (isfun(callback)) {
+				callback(x2js.xml_str2json(data).rss);
+			}
+		}).
+		error(function(data, status, headers, config) {
 
-		$scope.minimize = function() {
-			win.minimize();
-		}
+		});
+	}
 
-		$scope.maximize = function() {
-			console.log($scope.isMaximized)
-			if ($scope.isMaximized) {
-				$scope.isMaximized = false;
-				win.unmaximize();
-			} else {
-				$scope.isMaximized = true;
-				win.maximize();
+}])
+
+cagestudio.controller('IndexController', [
+		'$scope',
+		'$location',
+		'$firebase',
+		'getFeed',
+		function($scope, $location, $firebase, getFeed) {
+
+			var ref = new Firebase("https://bitcage.firebaseio.com/feeds"),
+				sync = $firebase(ref),
+				tempFeed;
+			$scope.feeds = sync.$asArray();
+			$.AMUI.progress.configure({ parent: '#container',showSpinner: false });
+			$.AMUI.progress.start();
+
+			$scope.addFeed = function() {
+				var url = $scope.url;
+				if (!url) return;
+				getFeed(url, function(result) {
+					$scope.feeds.$add({
+						name: result.channel.description.substring(0, 10),
+						url: url
+					});
+					$scope.url = "";
+				})
+			}
+
+			$scope.setEdit = function(feed) {
+				$scope.targetFeed = feed;
+				tempFeed = {
+					name: feed.name,
+					url: feed.url
+				}
+			}
+
+			$scope.setDelete = function(feed) {
+				$scope.targetFeed = feed;
+			}
+
+			$scope.cancel = function() {
+				$scope.targetFeed.name = tempFeed.name;
+				$scope.targetFeed.url = tempFeed.url;
+			}
+
+			$scope.jump = function($event) {
+				if ($event) $event.preventDefault();
+				$location.path($event.target.getAttribute('href'));
+			}
+
+			$scope.isActive = function(route) {
+				if (route == "/news" && $location.path() == "/") return true;
+				return route === $location.path();
+			}
+
+			$scope.close = function() {
+				win.close();
+			}
+
+			$scope.minimize = function() {
+				win.minimize();
+			}
+
+			$scope.maximize = function() {
+				if ($scope.isMaximized) {
+					$scope.isMaximized = false;
+					win.unmaximize();
+				} else {
+					$scope.isMaximized = true;
+					win.maximize();
+				}
 			}
 		}
-	}])
+	])
 	.controller('NewsController', [
 		'$scope',
-		'$http',
-		function($scope, $http) {
+		'getFeed',
+		'$firebase',
+		'$routeParams',
+		function($scope, getFeed, $firebase, $routeParams) {
+			var ref = new Firebase("https://bitcage.firebaseio.com/feeds"),
+				sync = $firebase(ref),
+				list = sync.$asArray();
+
 			$scope.list = [];
 			$scope.isnews = true;
 
-			var x2js = new X2JS(),
-				channel;
+			var show = function(url) {
+				getFeed(url, function(result) {
+					$.AMUI.progress.done();
+					$scope.list = result.channel.item;
+					$scope.title = result.channel.title;
+				})
+			}
 
-			$http.get('http://blog.jobbole.com/feed/').
-			success(function(data, status, headers, config) {
-				channel = x2js.xml_str2json(data).rss.channel;
-				$scope.list = channel.item;
-				$scope.title = channel.title;
-			}).
-			error(function(data, status, headers, config) {
+			list.$loaded().then(function() {
+
+				if (!$routeParams.feedId) {
+					show(list[0].url);
+					return;
+				}
+				var feed = list.$getRecord($routeParams.feedId);
+				show(feed.url);
 
 			});
+
+
 
 			$scope.show = function($event, $index) {
 				if ($event) $event.preventDefault();
@@ -94,7 +171,7 @@ cagestudio.controller('IndexController', ['$scope', '$location', function($scope
 
 		}
 	])
-	.controller('MusicController', [function() {
+	.controller('MusicController', ['$scope', function($scope) {
 
 		$scope.ismusic = true;
 

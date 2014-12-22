@@ -114,3 +114,48 @@ body{
 ::-webkit-scrollbar-thumb {
   background-color: #333;
 }
+
+.feed-checkbox{
+	display: inline-block;
+	padding: 0 5px 0 0;
+	width: auto;
+	height: 28px;
+	background-color: #0e90d2;
+	margin-right: 2px;
+	margin-bottom: 5px;
+}
+
+.feed-checkbox .close,.feed-checkbox .edit{
+	display: inline-block;
+	color: #333333;
+	cursor: pointer;
+	line-height: 1;
+	vertical-align: baseline;
+	text-align: center;
+}
+
+.feed-checkbox .close:hover,.feed-checkbox .edit:hover{
+	color: #000000;
+}
+
+.feed-checkbox a span{
+	line-height: 1;
+	font-size: small;
+}
+
+.input-group{
+	width: 100%;
+}
+
+.input-group input{
+	width: 70%;
+}
+
+.input-group input, .input-group button{
+	height: 30px;
+}
+
+.feed-edit{
+	width: 540px;
+	margin-left: -270px;
+}
