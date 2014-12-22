@@ -1,7 +1,7 @@
 <div data-am-widget="list_news" class="am-list-news am-list-news-default" ng-controller="NewsController">
 
   <div class="am-list-news-hd am-cf" style="padding-top:0">
-    <a href="##">
+    <a href="#">
       <h2 ng-bind="title">栏目标题</h2>
       <span class="am-list-news-more am-fr">更多 &raquo;</span>
     </a>
@@ -22,10 +22,12 @@
   <div class="am-popup" id="article-show">
     <div class="am-popup-inner">
       <div class="am-popup-hd">
-        <h4 class="am-popup-title" ng-bind="article.title">...</h4>
+        <a href="javascript:void(0)" onclick="document.getElementById('article-panel').scrollTop=0">
+          <h4 class="am-popup-title" ng-bind="article.title"></h4>
+        </a>
         <span data-am-modal-close class="am-close">&times;</span>
       </div>
-      <div class="am-popup-bd" ng-bind-html="article.description | unsafe"></div>
+      <div class="am-popup-bd" ng-bind-html="article.description | unsafe" id="article-panel"></div>
     </div>
   </div>
 </div>

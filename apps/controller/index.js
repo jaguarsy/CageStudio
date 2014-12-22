@@ -173,7 +173,7 @@ cagestudio.controller('IndexController', [
 				return [obj];
 			}
 
-			var show = function(url) {
+			var getList = function(url) {
 				getFeed(url, function(result) {
 					$.AMUI.progress.done();
 					$scope.list = toArray(result.channel.item);
@@ -184,11 +184,11 @@ cagestudio.controller('IndexController', [
 			list.$loaded().then(function() {
 
 				if (!$routeParams.feedId) {
-					show(list[0].url);
+					getList(list[0].url);
 					return;
 				}
 				var feed = list.$getRecord($routeParams.feedId);
-				show(feed.url);
+				getList(feed.url);
 
 			});
 

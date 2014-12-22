@@ -6,6 +6,7 @@
     "toolbar": false,
     "frame": false,
     "fullscreen":false,
+    "position": "center",
     "width": 980,
     "height": 700
   }
