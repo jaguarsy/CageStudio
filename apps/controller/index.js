@@ -20,6 +20,22 @@ cagestudio.filter('unsafe', ['$sce', function($sce) {
 	};
 }]);
 
+cagestudio.filter('summary', [function() {
+	var getSummary = function(text) {
+		var start_ptn = /(<[^>]+>)*/gmi,
+			end_ptn = /<\/?\w+>$/,
+			space_ptn = /(&nbsp;)*/;
+		return text.replace(start_ptn, "").replace(end_ptn).replace(space_ptn, "");
+	}
+	return function(val) {
+		if (val == undefined) return "";
+		if (val["__cdata"])
+			return getSummary(val["__cdata"]);
+		else
+			return getSummary(val);
+	};
+}]);
+
 cagestudio.config(['$routeProvider', function($routeProvider) {
 	$routeProvider
 		.when('/', {
@@ -148,10 +164,19 @@ cagestudio.controller('IndexController', [
 			$scope.list = [];
 			$scope.isnews = true;
 
+			var isArray = function(v) {
+				return toString.apply(v) === '[object Array]';
+			}
+
+			var toArray = function(obj) {
+				if (isArray(obj)) return obj;
+				return [obj];
+			}
+
 			var show = function(url) {
 				getFeed(url, function(result) {
 					$.AMUI.progress.done();
-					$scope.list = result.channel.item;
+					$scope.list = toArray(result.channel.item);
 					$scope.title = result.channel.title;
 				})
 			}
@@ -166,8 +191,6 @@ cagestudio.controller('IndexController', [
 				show(feed.url);
 
 			});
-
-
 
 			$scope.show = function($event, $index) {
 				if ($event) $event.preventDefault();
