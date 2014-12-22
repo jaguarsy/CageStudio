@@ -1,84 +1,84 @@
 html,body{
-	height: 100%;
-	margin: 0;
-	padding: 0;
-	overflow: hidden;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
 }
 
 body{
-	background: #000000;
+    background: #000000;
 }
 
 .bg-black{
-	background: #000000;
+    background: #000000;
 }
 
 .bg-black li{
-	background: #000000;
+    background: #000000;
 }
 
 .title{
-	width: 100%;
-	height: 40px;
-	background: #222222;
-	-webkit-app-region: drag;
+    width: 100%;
+    height: 40px;
+    background: #222222;
+    -webkit-app-region: drag;
 }
 
 .container{
-	width: 100%;
-	height: 100%;
+    width: 100%;
+    height: 100%;
 }
 
 .pull-right{
-	float: right;
+    float: right;
 }
 
 .panel-left{
-	float: left;
-	width:75%;
+    float: left;
+    width:75%;
 }
 
 .panel-right{
-	float: left;
-	padding:5px;
-	background: #111111;
-	height:100%;
-	width:25%;
+    float: left;
+    padding:5px;
+    background: #111111;
+    height:100%;
+    width:25%;
 }
 
 .titlepanel{
-	float: left;
-	margin-top: 7px;
-	margin-left: 10px;
-	color: #aaaaaa;
-	-webkit-app-region: no-drag;
+    float: left;
+    margin-top: 7px;
+    margin-left: 10px;
+    color: #aaaaaa;
+    -webkit-app-region: no-drag;
 }
 
 .menupanel{
-	float: right;
-	margin-top: 7px;
-	margin-right: 10px;
-	-webkit-app-region: no-drag;
+    float: right;
+    margin-top: 7px;
+    margin-right: 10px;
+    -webkit-app-region: no-drag;
 }
 
 .menupanel a{
-	margin-right: 5px;
+    margin-right: 5px;
 }
 
 .menupanel a span{
-	font-weight: bold;
+    font-weight: bold;
 }
 
 #menubar{
-	-webkit-app-region: no-drag;
+    -webkit-app-region: no-drag;
 }
 
 #menubar ul li a span{
-	width: 20px;
+    width: 20px;
 }
 
 .amz-sidebar{
-	background-color: #222222;
+    background-color: #222222;
 }
 
 .am-nav > li > a:hover,
@@ -96,9 +96,9 @@ body{
 }
 
 .panel-left{
-	height:95%;
-	overflow-y:auto; 
-	overflow-x:hidden;
+    height:95%;
+    overflow-y:auto; 
+    overflow-x:hidden;
 }
 
 ::-webkit-scrollbar-track {
@@ -116,56 +116,56 @@ body{
 }
 
 .feed-checkbox{
-	display: inline-block;
-	padding: 0 5px 0 0;
-	width: auto;
-	height: 28px;
-	background-color: #0e90d2;
-	margin-right: 2px;
-	margin-bottom: 5px;
+    display: inline-block;
+    padding: 0 5px 0 0;
+    width: auto;
+    height: 28px;
+    background-color: #0e90d2;
+    margin-right: 2px;
+    margin-bottom: 5px;
 }
 
 .feed-checkbox .close,.feed-checkbox .edit{
-	display: inline-block;
-	color: #333333;
-	cursor: pointer;
-	line-height: 1;
-	vertical-align: baseline;
-	text-align: center;
+    display: inline-block;
+    color: #333333;
+    cursor: pointer;
+    line-height: 1;
+    vertical-align: baseline;
+    text-align: center;
 }
 
 .feed-checkbox .close:hover,.feed-checkbox .edit:hover{
-	color: #000000;
+    color: #000000;
 }
 
 .feed-checkbox a span{
-	line-height: 1;
-	font-size: small;
+    line-height: 1;
+    font-size: small;
 }
 
 .input-group{
-	width: 100%;
+    width: 100%;
 }
 
 .input-group input{
-	width: 70%;
+    width: 70%;
 }
 
 .input-group input, .input-group button{
-	height: 30px;
+    height: 30px;
 }
 
 .feed-edit{
-	width: 540px;
-	margin-left: -270px;
+    width: 540px;
+    margin-left: -270px;
 }
 
 /*修正amazeui滚动条超出顶部的bug*/
 .am-popup-inner{
-	overflow: hidden;
+    overflow: hidden;
 }
 
 .am-popup-bd{
-	overflow: auto;
-	height: 630px;
+    overflow: auto;
+    height: 630px;
 }
