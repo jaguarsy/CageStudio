@@ -13,7 +13,10 @@ cagestudio.filter('dateFilter', function() {
 cagestudio.filter('unsafe', ['$sce', function($sce) {
 	return function(val) {
 		if (val == undefined) return "";
-		return $sce.trustAsHtml(val["__cdata"]);
+		if (val["__cdata"])
+			return $sce.trustAsHtml(val["__cdata"]);
+		else
+			return $sce.trustAsHtml(val);
 	};
 }]);
 
@@ -69,15 +72,13 @@ cagestudio.controller('IndexController', [
 				sync = $firebase(ref),
 				tempFeed;
 			$scope.feeds = sync.$asArray();
-			$.AMUI.progress.configure({ parent: '#container',showSpinner: false });
-			$.AMUI.progress.start();
 
 			$scope.addFeed = function() {
 				var url = $scope.url;
 				if (!url) return;
 				getFeed(url, function(result) {
 					$scope.feeds.$add({
-						name: result.channel.description.substring(0, 10),
+						name: result.channel.title.substring(0, 15),
 						url: url
 					});
 					$scope.url = "";
@@ -139,6 +140,10 @@ cagestudio.controller('IndexController', [
 			var ref = new Firebase("https://bitcage.firebaseio.com/feeds"),
 				sync = $firebase(ref),
 				list = sync.$asArray();
+			$.AMUI.progress.configure({
+				showSpinner: false
+			});
+			$.AMUI.progress.start();
 
 			$scope.list = [];
 			$scope.isnews = true;

@@ -10,7 +10,7 @@
   <div class="am-list-news-bd bg-black">
     <ul class="am-list">
       <li class="am-g am-list-item-dated" ng-repeat="item in list">
-        <a data-am-modal="{target: '#article-show'}" ng-click="show($event,$index)" class="am-list-item-hd">
+        <a href="#" data-am-modal="{target: '#article-show'}" ng-click="show($event,$index)" class="am-list-item-hd">
           <small ng-bind="item.title"></small>
         </a>
         <span class="am-list-date" ng-bind="item.pubDate | dateFilter | date:'yyyy/MM/dd HH:mm'"></span>
@@ -24,7 +24,7 @@
         <h4 class="am-popup-title" ng-bind="article.title">...</h4>
         <span data-am-modal-close class="am-close">&times;</span>
       </div>
-      <div class="am-popup-bd" ng-bind-html="article.encoded | unsafe"></div>
+      <div class="am-popup-bd" ng-bind-html="article.description | unsafe"></div>
     </div>
   </div>
 </div>
