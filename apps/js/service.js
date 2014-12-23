@@ -18,6 +18,11 @@ angular.module('CageStudioApp')
                     function(data, status, headers, config) {}
                 );
             },
+            getVal: function(obj, attr) {
+                if (obj[attr]['__cdata']) return obj[attr]['__cdata'];
+                return obj[attr];
+            },
+
             isArray: function(v) {
                 return toString.apply(v) === '[object Array]';
             },
@@ -63,10 +68,11 @@ angular.module('CageStudioApp')
                     isMaximized = true;
                     win.maximize();
                 }
+            },
+            open: function(link) {
+                gui.Shell.openExternal(link);
             }
-
         }
-
     }])
     .factory('fireManage', ['$firebase', function($firebase) {
         var ref = new Firebase("https://bitcage.firebaseio.com/feeds"),

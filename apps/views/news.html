@@ -1,33 +1,37 @@
 <div data-am-widget="list_news" class="am-list-news am-list-news-default" ng-controller="NewsController">
 
-  <div class="am-list-news-hd am-cf" style="padding-top:0">
-    <a href="#">
-      <h2 ng-bind="title">栏目标题</h2>
-      <span class="am-list-news-more am-fr">更多 &raquo;</span>
-    </a>
-  </div>
-
-  <div class="am-list-news-bd bg-black">
-    <ul class="am-list">
-      <li class="am-g am-list-item-desced" ng-repeat="item in list">
-        <a href="#" data-am-modal="{target: '#article-show'}" ng-click="show($event,$index)" class="am-list-item-hd">
-          <small ng-bind="item.title"></small>
+    <div class="am-list-news-hd am-cf" style="padding-top:0">
+        <a href="#">
+            <h2 ng-bind="title">栏目标题</h2>
+            <span class="am-list-news-more am-fr">更多 &raquo;</span>
         </a>
-        <div class="am-list-item-text" ng-bind="item.description | summary"></div>
-        <span class="am-list-date" ng-bind="item.pubDate | dateFilter | date:'yyyy/MM/dd HH:mm'"></span>
-      </li>
-    </ul>
-  </div>
-
-  <div class="am-popup" id="article-show">
-    <div class="am-popup-inner">
-      <div class="am-popup-hd">
-        <a href="javascript:void(0)" onclick="document.getElementById('article-panel').scrollTop=0">
-          <h4 class="am-popup-title" ng-bind="article.title"></h4>
-        </a>
-        <span data-am-modal-close class="am-close">&times;</span>
-      </div>
-      <div class="am-popup-bd" ng-bind-html="article.description | unsafe" id="article-panel"></div>
     </div>
-  </div>
+
+    <div class="am-list-news-bd bg-black">
+        <ul class="am-list">
+            <li class="am-g am-list-item-desced" ng-repeat="item in list">
+                <a href="#" data-am-modal="{target: '#article-show'}" ng-click="show($event,$index)" class="am-list-item-hd">
+                    <small ng-bind="item.title"></small>
+                </a>
+                <div class="am-list-item-text" ng-bind="item.description | summary"></div>
+                <span class="am-list-date" ng-bind="item.pubDate | dateFilter | date:'yyyy/MM/dd HH:mm'"></span>
+            </li>
+        </ul>
+    </div>
+
+    <div class="am-popup" id="article-show">
+        <div class="am-popup-inner">
+            <div class="am-popup-hd">
+                <a href="javascript:void(0)" class="detail" ng-click="getDetail(article.link)">[Detail]</a>
+                <a href="javascript:void(0)" onclick="document.getElementById('article-panel').scrollTop=0">
+                    <h4 class="am-popup-title" ng-bind="article.title"></h4>
+                </a>
+                <span data-am-modal-close class="am-close">&times;</span>
+            </div>
+            <div class="am-popup-bd" id="article-panel">
+                <img ng-src="{{article.image}}">
+                <div ng-bind-html="article.description | unsafe" ></div>
+            </div>
+        </div>
+    </div>
 </div>

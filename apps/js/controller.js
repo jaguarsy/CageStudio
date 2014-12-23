@@ -12,9 +12,10 @@ angular.module('CageStudioApp')
             var tempFeed;
 
             $scope.addFeed = function() {
-                cagelib.getFeed($scope.url, function(result) {
+                var url = $scope.url;
+                cagelib.getFeed(url, function(result) {
                     $scope.feeds.$add({
-                        name: result.channel.title.substring(0, 15),
+                        name: cagelib.getVal(result.channel, 'title').substring(0, 15),
                         url: url
                     });
                     $scope.url = "";
@@ -49,9 +50,10 @@ angular.module('CageStudioApp')
     .controller('NewsController', [
         '$scope',
         'cagelib',
+        'winManage',
         'fireManage',
         '$routeParams',
-        function($scope, cagelib, fireManage, $routeParams) {
+        function($scope, cagelib, winManage, fireManage, $routeParams) {
             var list = fireManage.getArray();
 
             $.AMUI.progress.start();
@@ -79,6 +81,10 @@ angular.module('CageStudioApp')
             $scope.show = function($event, $index) {
                 if ($event) $event.preventDefault();
                 $scope.article = $scope.list[$index];
+            }
+
+            $scope.getDetail = function(link) {
+                winManage.open(link);
             }
 
         }

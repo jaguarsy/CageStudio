@@ -169,3 +169,20 @@ body{
     overflow: auto;
     height: 630px;
 }
+
+.detail{
+	display: inline;
+	margin-left: 5px;
+	margin-top: 10px;
+	width: 20px;
+	float: left;
+}
+
+.am-popup-hd .am-popup-title{
+	margin: 0 50px;
+}
+
+.am-popup{
+	width: 700px;
+	margin-left: -350px;
+}
