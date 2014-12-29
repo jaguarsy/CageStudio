@@ -30,7 +30,7 @@
             </div>
             <div class="am-popup-bd" id="article-panel">
                 <img ng-src="{{article.image}}">
-                <div ng-bind-html="article.description | unsafe" ></div>
+                <div ng-bind-html="(article.encoded? article.encoded : article.description) | unsafe" ></div>
             </div>
         </div>
     </div>

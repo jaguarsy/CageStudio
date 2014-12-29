@@ -2,25 +2,18 @@ angular.module('CageStudioApp')
     .directive('binddetail', [function() {
 
         function link(scope, element, attrs) {
-            var detail;
-
-            function getDetail(obj) {}
-
-            function updateDetail() {
-                element.html(detail);
-            }
+            var detail = "test";
 
             scope.$watch(attrs.binddetail, function(value) {
-                detail = value.image + value.description;
-                updateDetail();
+                element.html(detail);
             });
 
             element.on('$destroy', function() {
-                element.text('');
+                //element.text('');
             });
         }
 
         return {
             link: link
         };
-    }]);
+    }])
