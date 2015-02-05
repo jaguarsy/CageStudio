@@ -1,7 +1,7 @@
 "use strict"
 
 angular.module('CageStudioApp')
-.directive('binddetail', [function() {
+    .directive('binddetail', [function() {
 
         function link(scope, element, attrs) {
             var detail = "test";
